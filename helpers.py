@@ -19,8 +19,18 @@ def get_numero_telephone() -> str:
         return telephone
 
 
+from tabulate import tabulate
 
-        
+def display_data(data, columns, format="rounded_grid") -> None:
+    print(tabulate(data, headers=columns, tablefmt=format))
+
+
+# TODO : Implementer La fonction qui permet d'afficher le menu
+def display_menu(title:str, items:list[str], symb:str='*') -> None:
+    pass
+# TODO : Implementer la fonction qui permet de chercher un contact par son ou son telephone
+def display_menu():
+    pass
 
 
 if __name__ == '__main__':

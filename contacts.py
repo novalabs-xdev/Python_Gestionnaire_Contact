@@ -1,39 +1,36 @@
 #=================== Imports  ===================#
-from helpers import get_clean_input, get_numero_telephone
+from helpers import display_data 
+from db import operateurs
+
 #=================== Imports  ===================#
 
-
-
-contacts = []
-
-def creer_contact(nom: str, telephone: str) -> dict:
+def creer_contact(nom: str, telephone: str) -> dict[str, str]:
     return {
         "nom" : nom,
         "telephone" : telephone,
-        "operateur": "Inconnu"
+        "operateur": detecter_operateur(telephone)
         }
 
 def afficher_contact(contact: dict[str]) -> None:
     print(f"{contact.get("nom")} : {contact.get('telephone')} : {contact.get('operateur')}")
 
 
-def ajouter_contact(contacts: list[dict], contact: dict) -> None:
+def ajouter_contact(contacts: list[dict[str, str]], contact: dict[str, str]) -> None:
     contacts.append(contact)
 
+def lister_contacts(contacts: list[dict[str, str]]) -> None:
+    # print(contacts)
+    display_data(contacts, "keys")
 
-def lister_contacts(contacts: list[dict]) -> None:
-    for contact in contacts:
-        afficher_contact(contact)
+def detecter_operateur(telephone: str) -> str:
+    for nom_operateur, indicatifs in operateurs.items():
+        if telephone[:2] in indicatifs:
+            return nom_operateur
+    return "Inconnu"
 
 
 # =====Programme principale ======#
 
 
-
 if __name__ == '__main__':
-    nom = get_clean_input("Entrez le nom du contact : ", msg_error="Nom invalide, Veuillez recommencer !")
-    telephone = get_numero_telephone()       
-       
-    contact1 = creer_contact(nom, telephone)
-    ajouter_contact(contacts, contact1)
-    lister_contacts(contacts)
+   pass
